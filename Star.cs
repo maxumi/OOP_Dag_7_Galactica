@@ -6,9 +6,10 @@ using System.Threading.Tasks;
 
 namespace Galactica
 {
-    public enum Startype { YellowDwarf, White, BlueNeutron, RedGiant }
+    //public enum Startype { YellowDwarf, White, BlueNeutron, RedGiant }
     internal class Star : SpaceObject
     {
+        public enum Startype { YellowDwarf, White, BlueNeutron, RedGiant }
         public Startype Type { get; set; }
         public int Temperature { get; set; }
         public List<Planet> Planets = new List<Planet>();

@@ -4,50 +4,45 @@
     {
         static void Main(string[] args)
         {
-            Star sun= new Star();
-            sun.Name = "Sun";
+            Data data = new Data();//Creates the data.
+            Star sun = new Star();//Creates a star object.
+            sun = data.star;//The new sun object is equal to the star object in the data class.
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine("STAR:");
+            Console.ForegroundColor= ConsoleColor.Blue;
+            Console.WriteLine("Star Name: " + sun.Name);//writes the name of the star.
+            Console.WriteLine("Type: " + sun.Type+"\n");//And type
 
-            sun.Planets.Add(new Planet() { Name = "Mercury" });
-            sun.Planets.Add(new Planet() { Name = "Venus" });
-            sun.Planets.Add(new Planet() { Name = "Earth" });
-            sun.Planets.Add(new Planet() { Name = "Mars" });
-            sun.Planets.Add(new Planet() { Name = "Jupiter" });
-            sun.Planets.Add(new Planet() { Name = "Saturn" });
-            sun.Planets.Add(new Planet() { Name = "Uranus" });
-            sun.Planets.Add(new Planet() { Name = "Neptune" });
-
-
-            sun.Planets[0].Moons.Add(new Moon() { Name = "Luna" });
-            sun.Planets[1].Moons.Add(new Moon() { Name = "Titan" });
-            sun.Planets[2].Moons.Add(new Moon() { Name = "Phobos" });
-            sun.Planets[3].Moons.Add(new Moon() { Name = "Europe" });
-            sun.Planets[4].Moons.Add(new Moon() { Name = "Deimos" });
-            sun.Planets[5].Moons.Add(new Moon() { Name = "Ganymedes" });
-            sun.Planets[6].Moons.Add(new Moon() { Name = "Io" });
-            sun.Planets[7].Moons.Add(new Moon() { Name = "Mimas" });
-
-            //Creates positions.
-            sun.PositionNew.X = 13;
-            sun.PositionNew.Y = 12;
-            
-            sun.Planets[0].PositionNew.X = 20;
-            sun.Planets[0].PositionNew.Y = 29;
-            sun.Planets[1].PositionNew.X = 42;
-            sun.Planets[1].PositionNew.Y = 10;
-
-            sun.Planets[0].PositionNew.X = 20;
-            sun.Planets[0].PositionNew.Y = 29;
-
-            //run distance from star and planet.
-            Console.WriteLine($"Distance between {sun.Name} and {sun.Planets[0].Name}");
-            sun.Planets[0].distance(sun);
-            Console.WriteLine($"\nDistance between {sun.Name} and {sun.Planets[1].Name}");
-            sun.Planets[1].distance(sun);
-
-            Console.WriteLine($"\nDistance between {sun.Planets[0].Name} and {sun.Planets[0].Name}");
-            sun.Planets[0].Moons[0].distance(sun.Planets[0]);
-            Console.WriteLine($"\nDistance between {sun.Planets[1].Name} and {sun.Planets[1].Name}");
-            sun.Planets[1].Moons[0].distance(sun.Planets[1]);
+            Console.ForegroundColor= ConsoleColor.Green;
+            Console.WriteLine("PLANETS:");
+            Console.ForegroundColor= ConsoleColor.Blue;
+            foreach (Planet planet in sun.Planets)//Gets all planets in the sun object.
+            {//Writes the information.
+                Console.WriteLine("Id: "+planet.Id);
+                Console.WriteLine("Name: "+planet.Name);
+                Console.WriteLine("Planet type: "+planet.planetType);
+                Console.WriteLine("Rotation Period: "+planet.RotationPeriod);
+                Console.WriteLine("Diameter: "+planet.Diameter);
+                planet.distance(sun);//Uses the distance method to calculate the distance between the star and the planet.
+                Console.WriteLine();
+            }
+            //Foreach loop to print out the moons tied to the planets.
+            Console.ForegroundColor= ConsoleColor.Green;
+            Console.WriteLine("MOONS:");
+            Console.ForegroundColor= ConsoleColor.Blue;
+            foreach (Planet planet in sun.Planets)//Gets all planets in the object.
+            {
+                foreach (Moon moon in planet.Moons)//Gets the moon for each planet.
+                {//Moon info.
+                    Console.WriteLine("Id: " + moon.Id);
+                    Console.WriteLine("Name: " + moon.Name);
+                    Console.WriteLine("Rotation Period: " + moon.RotationPeriod);
+                    Console.WriteLine("Diameter: " + moon.Diameter);
+                    Console.WriteLine("Orbiting: " + planet.Name);
+                    moon.distance(planet);
+                    Console.WriteLine();
+                }
+            }
         }
     }
 }
